@@ -30,7 +30,7 @@ import {
   paginationSchema,
 } from "./common/schema";
 
-import { bearerTokenVerify } from "./common/decorate";
+import { bearerTokenVerify, replyOk200 } from "./common/decorate";
 
 const main = async () => {
   const app = fastify({ logger: loggerConfig });
@@ -61,7 +61,8 @@ const main = async () => {
   }
 
   // Middleware
-  bearerTokenVerify(app)
+  bearerTokenVerify(app);
+  replyOk200(app);
 
   // API Endpoint routes
   await app.register(
