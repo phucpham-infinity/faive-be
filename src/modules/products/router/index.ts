@@ -16,10 +16,11 @@ import {
 } from "../schema";
 
 export default async function (fastify: FastifyInstance) {
-  // List all products, paginated
+   // List all products, paginated
   fastify.route({
     method: "GET",
     url: "/",
+    preValidation: [fastify.authenticate],
     schema: getAllSchema,
     handler: getProducts,
   });

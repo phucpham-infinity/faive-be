@@ -14,5 +14,13 @@ declare module 'fastify' {
       REDIS_HOST: string;
       REDIS_PORT: number;
     };
+    authenticate: (request: FastifyRequest, reply: FastifyReply) => Promise<void>;
+  }
+
+  interface FastifyRequest {
+    user: {
+      id: string;
+      role: string;
+    };
   }
 }

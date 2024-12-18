@@ -6,6 +6,7 @@ import fastifyHelmet from "@fastify/helmet";
 import fastifyMongodb from "@fastify/mongodb";
 import fastifyRedis from "@fastify/redis";
 import fastifyJwt from "@fastify/jwt";
+import fastifySensible from "@fastify/sensible";
 
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
@@ -29,6 +30,8 @@ import {
   paginationSchema,
 } from "./common/schema";
 
+import { bearerTokenVerify } from "./common/middleware";
+
 const main = async () => {
   const app = fastify({ logger: loggerConfig });
 
@@ -40,6 +43,7 @@ const main = async () => {
   await app.register(fastifyMongodb, mongodbConfig(app));
   await app.register(fastifyRedis, redisConfig(app));
   await app.register(fastifyJwt, redisJwt(app));
+  await app.register(fastifySensible);
 
   // Json Schemas
   app.addSchema(paginationSchema);
@@ -55,6 +59,9 @@ const main = async () => {
       routePrefix: "/docs",
     });
   }
+
+  // Middleware
+  bearerTokenVerify(app)
 
   // API Endpoint routes
   await app.register(
