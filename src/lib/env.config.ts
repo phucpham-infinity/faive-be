@@ -22,7 +22,7 @@ const Config = {
       },
       DATABASE_URL: {
         type: "string",
-        default: "mongodb://localhost:27017/fastify-rest",
+        default: "mongodb://root:root123@45.149.207.141:27017/default",
       },
       ENABLE_SWAGGER: {
         type: "boolean",

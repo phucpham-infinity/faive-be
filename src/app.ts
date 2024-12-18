@@ -3,6 +3,7 @@ import fastifyEnv from "@fastify/env";
 import fastifyCors from "@fastify/cors";
 import fastifyCompress from "@fastify/compress";
 import fastifyHelmet from "@fastify/helmet";
+import fastifyMongodb from "@fastify/mongodb";
 
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
@@ -12,6 +13,8 @@ import corsConfig from "./config/cors.config";
 import loggerConfig from "./config/logger.config";
 import compressConfig from "./config/compress.config";
 import helmetConfig from "./config/helmet.config";
+import mongodbConfig from "./config/mongodb.config";
+
 import { swaggerConfig } from "./config/swagger.config";
 
 import { productsRoutes, productSchema } from "./modules/products";
@@ -30,6 +33,7 @@ const main = async () => {
   await app.register(fastifyCors, corsConfig);
   await app.register(fastifyCompress, compressConfig);
   await app.register(fastifyHelmet, helmetConfig);
+  await app.register(fastifyMongodb, mongodbConfig(app));
 
   // Json Schemas
   app.addSchema(paginationSchema);
