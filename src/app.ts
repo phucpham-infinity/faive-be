@@ -5,6 +5,7 @@ import fastifyCompress from "@fastify/compress";
 import fastifyHelmet from "@fastify/helmet";
 import fastifyMongodb from "@fastify/mongodb";
 import fastifyRedis from "@fastify/redis";
+import fastifyJwt from "@fastify/jwt";
 
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
@@ -15,7 +16,8 @@ import loggerConfig from "./config/logger.config";
 import compressConfig from "./config/compress.config";
 import helmetConfig from "./config/helmet.config";
 import mongodbConfig from "./config/mongodb.config";
-import redisConfig from "./config/resdis.config";
+import redisConfig from "./config/redis.config";
+import redisJwt from "./config/jwt.config";
 
 import { swaggerConfig } from "./config/swagger.config";
 
@@ -37,6 +39,7 @@ const main = async () => {
   await app.register(fastifyHelmet, helmetConfig);
   await app.register(fastifyMongodb, mongodbConfig(app));
   await app.register(fastifyRedis, redisConfig(app));
+  await app.register(fastifyJwt, redisJwt(app));
 
   // Json Schemas
   app.addSchema(paginationSchema);
