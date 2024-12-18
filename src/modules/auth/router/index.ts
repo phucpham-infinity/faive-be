@@ -1,8 +1,12 @@
 import { FastifyInstance } from "fastify";
-
-import { loginRouter } from "../biz/login/login.router";
+import * as authBiz from "../biz";
 
 export default async function (fastify: FastifyInstance) {
-  // List all products, paginated
-  loginRouter(fastify);
+   fastify.route({
+     method: "POST",
+     url: "/",
+     schema: authBiz.loginSchema,
+     handler: authBiz.createProduct,
+   });
+ 
 }

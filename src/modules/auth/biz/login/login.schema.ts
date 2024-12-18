@@ -1,19 +1,16 @@
-// POST '/'
-export const createSchema = {
+export const loginSchema = {
   tags: ["auth"],
-  description: "Creates a new Product",
+  description: "Login user",
   body: {
     type: "object",
-    required: ["name", "price", "categoryId"],
+    required: ["email", "password"],
     properties: {
-      name: { type: "string" },
-      price: { type: "number" },
-      published: { type: "boolean", default: true },
-      categoryId: { type: "string", pattern: "^[0-9a-fA-F]{24}$" },
+      email: { type: "string" },
+      password: { type: "string" },
     },
   },
   response: {
-    200: { $ref: "productSchema#" },
+    200: { $ref: "messageResponseSchema#" },
     404: { $ref: "messageResponseSchema#" },
   },
 };

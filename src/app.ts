@@ -15,6 +15,7 @@ import helmetConfig from "./config/helmet.config";
 import { swaggerConfig } from "./config/swagger.config";
 
 import { productsRoutes, productSchema } from "./modules/products";
+import { authRoutes } from "./modules/auth";
 import {
   messageSchema,
   paramIdSchema,
@@ -49,6 +50,7 @@ const main = async () => {
   await app.register(
     async (api) => {
       api.register(productsRoutes, { prefix: "/products" });
+      api.register(authRoutes, { prefix: "/auth" });
     },
     { prefix: "/api/v1" }
   );
