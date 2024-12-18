@@ -30,7 +30,7 @@ import {
   paginationSchema,
 } from "./common/schema";
 
-import { bearerTokenVerify } from "./common/middleware";
+import { bearerTokenVerify } from "./common/decorate";
 
 const main = async () => {
   const app = fastify({ logger: loggerConfig });

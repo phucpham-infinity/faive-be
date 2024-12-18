@@ -112,4 +112,4 @@ userSchema.methods.createPasswordResetToken = function () {
 userSchema.methods.checkPassword = verifyPassword;
 userSchema.index({ email: 1 }, { unique: true });
 
-export default mongoose.model<IUser>("User", userSchema);
+export const User =  mongoose.model<IUser>("User", userSchema);

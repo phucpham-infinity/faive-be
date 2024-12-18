@@ -1,10 +1,10 @@
-import { FastifyInstance } from 'fastify';
+import { FastifyInstance } from "fastify";
 
-declare module 'fastify' {
+declare module "fastify" {
   interface FastifyInstance {
     config: {
       JWT_SECRET: string;
-      NODE_ENV: 'development' | 'production' | 'test';
+      NODE_ENV: "development" | "production" | "test";
       BIND_PORT: number;
       BIND_ADDR: string;
       PROJECT_NAME: string;
@@ -14,7 +14,10 @@ declare module 'fastify' {
       REDIS_HOST: string;
       REDIS_PORT: number;
     };
-    authenticate: (request: FastifyRequest, reply: FastifyReply) => Promise<void>;
+    authenticate: (
+      request: FastifyRequest,
+      reply: FastifyReply
+    ) => Promise<void>;
   }
 
   interface FastifyRequest {
@@ -22,5 +25,8 @@ declare module 'fastify' {
       id: string;
       role: string;
     };
+  }
+  interface FastifyReply {
+    ok200: (data: any, meta?: any) => void;
   }
 }

@@ -2,6 +2,7 @@ import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 
 export enum MIDDLEWARE {
   AUTHENTICATE = "authenticate",
+  OK200 = "ok200",
 }
 
 export const bearerTokenVerify = (fastify: FastifyInstance) =>
@@ -16,3 +17,12 @@ export const bearerTokenVerify = (fastify: FastifyInstance) =>
       }
     }
   );
+
+export const replyOk200 = (fastify: FastifyInstance) =>
+  fastify.decorateReply(MIDDLEWARE.OK200, function (data: any, meta?: any) {
+    this.status(200).send({
+      status: "Success",
+      data: data,
+      meta: meta || null,
+    });
+  });
