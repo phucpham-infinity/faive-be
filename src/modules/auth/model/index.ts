@@ -1,4 +1,4 @@
-import argon2 from "argon2";
+import { hashPassword, verifyPassword } from "@/common/helper";
 import mongoose, { Document } from "mongoose";
 
 interface IUser extends Document {
@@ -12,16 +12,6 @@ interface IUser extends Document {
   passwordResetToken: string;
   passwordResetExpires: Date;
 }
-
-const hashPassword = async (password: string) => {
-  const hash = await argon2.hash(password);
-  return hash;
-};
-
-const verifyPassword = async (password: string, hash: string) => {
-  const isMatch = await argon2.verify(hash, password);
-  return isMatch;
-};
 
 const userSchema = new mongoose.Schema<IUser>({
   firstName: {
