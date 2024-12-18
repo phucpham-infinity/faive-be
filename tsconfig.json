@@ -16,7 +16,8 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   },
   "exclude": ["node_modules", "dist"],
   "ts-node": {
