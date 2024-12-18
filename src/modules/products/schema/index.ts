@@ -3,6 +3,7 @@ export const getAllSchema = {
   querystring: { $ref: "paginationSchema" },
   tags: ["products"],
   description: "List all products, paginated using a cursor paginator.",
+  security: [{ bearerAuth: [] }],
   response: {
     200: {
       type: "object",
