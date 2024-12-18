@@ -10,6 +10,8 @@ declare module 'fastify' {
       APP_SERVER_NAME: string;
       DATABASE_URL: string;
       ENABLE_SWAGGER: boolean;
+      REDIS_HOST: string;
+      REDIS_PORT: number;
     };
   }
 }

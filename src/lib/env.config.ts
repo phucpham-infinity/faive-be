@@ -24,6 +24,14 @@ const Config = {
         type: "string",
         default: "mongodb://root:root123@45.149.207.141:27017/default",
       },
+      REDIS_HOST:{
+        type: "string",
+        default: "45.149.207.141"
+      },
+      REDIS_PORT:{
+        type: "number",
+        default: 16379
+      },
       ENABLE_SWAGGER: {
         type: "boolean",
         default: true,
