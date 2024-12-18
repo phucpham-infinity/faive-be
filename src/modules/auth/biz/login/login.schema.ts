@@ -10,7 +10,15 @@ export const loginSchema = {
     },
   },
   response: {
-    200: { $ref: "messageResponseSchema#" },
+    200: {
+      body: {
+        type: "object",
+        properties: {
+          accessToken: { type: "string" },
+          tokenType: { type: "string" },
+        },
+      },
+    },
     404: { $ref: "messageResponseSchema#" },
   },
 };

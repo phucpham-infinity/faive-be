@@ -11,6 +11,7 @@ interface IUser extends Document {
   confirmPassword?: string;
   passwordResetToken: string;
   passwordResetExpires: Date;
+  checkPassword: (candidatePassword: string, userPassword: string) => Promise<boolean>,
 }
 
 const userSchema = new mongoose.Schema<IUser>({
