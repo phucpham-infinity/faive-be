@@ -20,6 +20,6 @@ export async function createProduct(
   if (error2) return reply.badGateway(error2.message);
   if (!isPasswordCorrect) return reply.badRequest("Password is incorrect");
 
-  const accessToken = await reply.jwtSign({ id: user._id, email: user.email });
-  return reply.ok200({ accessToken, tokenType: "bearer" });
+  const token = await reply.jwtSign({ id: user._id, email: user.email });
+  return reply.ok200({ _id: user._id, email: user.email, token });
 }

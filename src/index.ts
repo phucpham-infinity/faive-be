@@ -1,11 +1,15 @@
+import "module-alias/register";
 import { main } from "./app";
-import { gracefullyShutdown, unexpectedErrorHandler } from "./lib/exit-handler";
+import {
+  gracefullyShutdown,
+  unexpectedErrorHandler,
+} from "./common/lib/exit-handler";
 
 /*
  * Build service
  */
 main()
-  .then((app) => {
+  .then((app: any) => {
     // At this point we should be able to gracefully handle all this... We hope
     process.on("uncaughtException", (err) => unexpectedErrorHandler(app, err));
     process.on("unhandledRejection", (err) => unexpectedErrorHandler(app, err));
@@ -17,10 +21,10 @@ main()
      */
     app
       .listen({ port: app.config.BIND_PORT, host: app.config.BIND_ADDR })
-      .then((_) => {
+      .then(() => {
         app.log.info("Ready, Waiting for connections...");
       })
-      .catch((err) => {
+      .catch((err: any) => {
         app.log.error(
           {
             addr: app.config.BIND_ADDR,
@@ -31,7 +35,7 @@ main()
         );
       });
   })
-  .catch((err) => {
+  .catch((err: any) => {
     console.log(err);
     process.exit(1);
   });
