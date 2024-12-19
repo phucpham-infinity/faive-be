@@ -16,13 +16,11 @@ export const loginSchema = {
   body: loginUserBodyJsonSchema,
   response: {
     200: {
-      body: {
-        type: "object",
-        properties: {
-          _id: { type: "string" },
-          email: { type: "string" },
-          token: { type: "string" },
-        },
+      type: "object",
+      properties: {
+        _id: { type: "string" },
+        email: { type: "string" },
+        token: { type: "string" },
       },
     },
     404: { $ref: "messageResponseSchema#" },

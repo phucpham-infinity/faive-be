@@ -16,7 +16,8 @@ import loggerConfig from "./config/logger.config";
 import compressConfig from "./config/compress.config";
 import helmetConfig from "./config/helmet.config";
 import redisConfig from "./config/redis.config";
-import redisJwt from "./config/jwt.config";
+import jwtConfig from "./config/jwt.config";
+import bullConfig from "./config/bull.config";
 
 import { swaggerConfig } from "./config/swagger.config";
 
@@ -41,8 +42,11 @@ const main = async () => {
   await app.register(fastifyCompress, compressConfig);
   await app.register(fastifyHelmet, helmetConfig);
   await app.register(fastifyRedis, redisConfig(app));
-  await app.register(fastifyJwt, redisJwt(app));
+  await app.register(fastifyJwt, jwtConfig(app));
   await app.register(fastifySensible);
+  await app.register(bullConfig(app).registerPlugin() as any, {
+    prefix: "/queues",
+  });
 
   // Connect to MongoDB
   await connect(app.config.DATABASE_URL);

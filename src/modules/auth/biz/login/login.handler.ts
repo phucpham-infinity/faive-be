@@ -16,7 +16,6 @@ export async function loginUser(
   const [isPasswordCorrect, error2] = await asyncHandler(() =>
     user.checkPassword(password, user.password)
   );
-
   if (error2) return reply.badGateway(error2.message);
   if (!isPasswordCorrect) return reply.badRequest("Password is incorrect");
 

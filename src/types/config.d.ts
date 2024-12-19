@@ -13,6 +13,9 @@ declare module "fastify" {
       ENABLE_SWAGGER: boolean;
       REDIS_HOST: string;
       REDIS_PORT: number;
+      REDIS_PASSWORD: string;
+      BULL_QUEUE_NAMES_CSV: string;
+      REDIS_USERNAME: string;
     };
     authenticate: (
       request: FastifyRequest,

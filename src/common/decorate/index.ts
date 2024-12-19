@@ -22,7 +22,7 @@ export const replyOk200 = (fastify: FastifyInstance) =>
   fastify.decorateReply(MIDDLEWARE.OK200, function (data: any, meta?: any) {
     this.status(200).send({
       status: "Success",
-      data: data,
+      ...data,
       meta: meta || null,
     });
   });

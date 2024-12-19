@@ -32,6 +32,14 @@ const Config = {
         type: "number",
         default: 16379,
       },
+      REDIS_PASSWORD: {
+        type: "string",
+        default: "api123",
+      },
+      REDIS_USERNAME: {
+        type: "string",
+        default: "api",
+      },
       ENABLE_SWAGGER: {
         type: "boolean",
         default: true,
@@ -39,6 +47,10 @@ const Config = {
       JWT_SECRET: {
         type: "string",
         default: "supersecret",
+      },
+      BULL_QUEUE_NAMES_CSV: {
+        type: "string",
+        default: "Example",
       },
     },
   },

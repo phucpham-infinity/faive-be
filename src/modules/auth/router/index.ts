@@ -15,4 +15,11 @@ export default async function (fastify: FastifyInstance) {
     schema: authBiz.registerSchema,
     handler: authBiz.registerUser,
   });
+
+  fastify.route({
+    method: "POST",
+    url: "/forgot-password",
+    schema: authBiz.forgotPasswordSchema,
+    handler: authBiz.forgotPassword,
+  });
 }
