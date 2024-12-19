@@ -6,7 +6,7 @@ export default async function (fastify: FastifyInstance) {
     method: "POST",
     url: "/login",
     schema: authBiz.loginSchema,
-    handler: authBiz.createProduct,
+    handler: authBiz.loginUser,
   });
 
   fastify.route({

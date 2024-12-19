@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { asyncHandler } from "@/common/helper";
 import { User } from "@/modules/auth/model";
 
-export async function createProduct(
+export async function loginUser(
   request: FastifyRequest<{ Body: { email: string; password: string } }>,
   reply: FastifyReply
 ) {
@@ -14,7 +14,6 @@ export async function createProduct(
   if (!user) return reply.notFound("User not found");
 
   const [isPasswordCorrect, error2] = await asyncHandler(() =>
-    // @ts-ignore
     user.checkPassword(password, user.password)
   );
 

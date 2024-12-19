@@ -1,14 +1,19 @@
+import { z } from "zod";
+import { zodToJsonSchema } from "zod-to-json-schema";
+
+const loginUserBodySchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6),
+});
+
+const loginUserBodyJsonSchema = zodToJsonSchema(loginUserBodySchema, {
+  name: "loginUserBodyJsonSchema",
+})?.definitions?.loginUserBodyJsonSchema;
+
 export const loginSchema = {
   tags: ["auth"],
   description: "Login user",
-  body: {
-    type: "object",
-    required: ["email", "password"],
-    properties: {
-      email: { type: "string" },
-      password: { type: "string" },
-    },
-  },
+  body: loginUserBodyJsonSchema,
   response: {
     200: {
       body: {

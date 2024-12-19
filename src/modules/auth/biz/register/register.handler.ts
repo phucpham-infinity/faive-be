@@ -1,17 +1,14 @@
 import { FastifyReply, FastifyRequest } from "fastify";
+import { z } from "zod";
+
 import { asyncHandler } from "@/common/helper";
 import { User } from "@/modules/auth/model";
 import { UserProfile } from "@/modules/userProfile/model";
+import { registerBodySchema } from "./register.schema";
 
 export async function registerUser(
   request: FastifyRequest<{
-    Body: {
-      email: string;
-      password: string;
-      first_name: string;
-      last_name: string;
-      confirmPassword: string;
-    };
+    Body: z.infer<typeof registerBodySchema>;
   }>,
   reply: FastifyReply
 ) {
