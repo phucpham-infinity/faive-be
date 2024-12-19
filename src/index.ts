@@ -22,6 +22,9 @@ main()
     app
       .listen({ port: app.config.BIND_PORT, host: app.config.BIND_ADDR })
       .then(() => {
+        app.log.info(
+          `Open api at http://${app.config.BIND_ADDR}:${app.config.BIND_PORT}/docs`
+        );
         app.log.info("Ready, Waiting for connections...");
       })
       .catch((err: any) => {

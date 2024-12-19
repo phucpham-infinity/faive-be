@@ -2,23 +2,30 @@ import { hashPassword, verifyPassword } from "@/common/helper";
 import mongoose, { Document } from "mongoose";
 
 interface IUser extends Document {
-  firstName: string;
-  lastName: string;
-  productCount: number;
-  hasEverAddedProduct: boolean;
+  first_name: string;
+  last_name: string;
+  product_count: number;
+  has_ever_added_product: boolean;
   email: string;
   password: string;
-  confirmPassword?: string;
-  passwordResetToken: string;
-  passwordResetExpires: Date;
-  checkPassword: (candidatePassword: string, userPassword: string) => Promise<boolean>,
+  confirm_password?: string;
+  password_reset_token: string;
+  password_reset_expires: Date;
+  created_at: Date;
+  updated_at: Date;
+  delete_at: Date;
+
+  checkPassword: (
+    candidatePassword: string,
+    userPassword: string
+  ) => Promise<boolean>;
 }
 
 const userSchema = new mongoose.Schema<IUser>({
-  firstName: {
+  first_name: {
     type: String,
   },
-  lastName: {
+  last_name: {
     type: String,
   },
   email: {
@@ -30,7 +37,7 @@ const userSchema = new mongoose.Schema<IUser>({
     select: false,
     required: true,
   },
-  confirmPassword: {
+  confirm_password: {
     type: String,
     required: [true, "Enter your confirm password"],
     validate: {
@@ -40,16 +47,31 @@ const userSchema = new mongoose.Schema<IUser>({
       message: "Password and confirm password should be same!",
     },
   },
-  productCount: {
+  product_count: {
     type: Number,
     default: 0,
   },
-  hasEverAddedProduct: {
+  has_ever_added_product: {
     type: Boolean,
     default: false,
   },
-  passwordResetToken: String,
-  passwordResetExpires: Date,
+  password_reset_token: {
+    type: String,
+  },
+  password_reset_expires: {
+    type: Date,
+  },
+  created_at: {
+    type: Date,
+    default: Date.now(),
+  },
+  updated_at: {
+    type: Date,
+    default: Date.now(),
+  },
+  delete_at: {
+    type: Date,
+  },
 });
 
 // Convert user's original password to hash
@@ -61,50 +83,36 @@ userSchema.pre<IUser>("save", async function (next) {
   // Hash the password
   this.password = await hashPassword(this.password);
 
-  // Remove confirmPassword field before saving to the database
-  this.confirmPassword = undefined;
+  // Remove confirm_password field before saving to the database
+  this.confirm_password = undefined;
   next();
 });
 
-// Generate token on forget password
-// userSchema.methods.createPasswordResetToken = function () {
-//   const resetToken = crypto.randomBytes(32).toString('hex')
-
-//   this.passwordResetToken = crypto
-//     .createHash('sha256')
-//     .update(resetToken)
-//     .digest('hex')
-
-//   this.passwordResetExpires = Date.now() + 10 * 60 * 60 * 1000
-
-//   return resetToken
-// }
-
 const generateOtp = () => {
-//   const types = {
-//     alphanumeric: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-//     numeric: "0123456789",
-//     alpha: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-//   };
+  //   const types = {
+  //     alphanumeric: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  //     numeric: "0123456789",
+  //     alpha: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  //   };
 
-//   const otpType = config.otp.type;
-//   const otpLength = config.otp.length;
+  //   const otpType = config.otp.type;
+  //   const otpLength = config.otp.length;
 
-//   const str = types[otpType];
+  //   const str = types[otpType];
 
-//   let OTP = "";
+  //   let OTP = "";
 
-//   for (let i = 0; i < otpLength; i++) {
-//     OTP += str[Math.floor(Math.random() * otpLength)];
-//   }
-  return '111111';
+  //   for (let i = 0; i < otpLength; i++) {
+  //     OTP += str[Math.floor(Math.random() * otpLength)];
+  //   }
+  return "111111";
 };
 
-userSchema.methods.createPasswordResetToken = function () {
+userSchema.methods.createpassword_reset_token = function () {
   const otp = generateOtp();
 
-  this.passwordResetToken = otp;
-  this.passwordResetExpires = Date.now() + 10 * 60 * 60 * 1000;
+  this.password_reset_token = otp;
+  this.password_reset_expires = Date.now() + 10 * 60 * 60 * 1000;
 
   return otp;
 };
@@ -113,4 +121,4 @@ userSchema.methods.createPasswordResetToken = function () {
 userSchema.methods.checkPassword = verifyPassword;
 userSchema.index({ email: 1 }, { unique: true });
 
-export const User =  mongoose.model<IUser>("User", userSchema);
+export const User = mongoose.model<IUser>("User", userSchema);

@@ -14,8 +14,9 @@ export const loginSchema = {
       body: {
         type: "object",
         properties: {
-          accessToken: { type: "string" },
-          tokenType: { type: "string" },
+          _id: { type: "string" },
+          email: { type: "string" },
+          token: { type: "string" },
         },
       },
     },

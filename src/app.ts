@@ -3,7 +3,6 @@ import fastifyEnv from "@fastify/env";
 import fastifyCors from "@fastify/cors";
 import fastifyCompress from "@fastify/compress";
 import fastifyHelmet from "@fastify/helmet";
-import fastifyMongodb from "@fastify/mongodb";
 import fastifyRedis from "@fastify/redis";
 import fastifyJwt from "@fastify/jwt";
 import fastifySensible from "@fastify/sensible";
@@ -16,7 +15,6 @@ import corsConfig from "./config/cors.config";
 import loggerConfig from "./config/logger.config";
 import compressConfig from "./config/compress.config";
 import helmetConfig from "./config/helmet.config";
-import mongodbConfig from "./config/mongodb.config";
 import redisConfig from "./config/redis.config";
 import redisJwt from "./config/jwt.config";
 
@@ -32,6 +30,8 @@ import {
 
 import { bearerTokenVerify, replyOk200 } from "./common/decorate";
 
+import { connect } from "./common/lib/mongo.db";
+
 const main = async () => {
   const app = fastify({ logger: loggerConfig });
 
@@ -40,10 +40,12 @@ const main = async () => {
   await app.register(fastifyCors, corsConfig);
   await app.register(fastifyCompress, compressConfig);
   await app.register(fastifyHelmet, helmetConfig);
-  await app.register(fastifyMongodb, mongodbConfig(app));
   await app.register(fastifyRedis, redisConfig(app));
   await app.register(fastifyJwt, redisJwt(app));
   await app.register(fastifySensible);
+
+  // Connect to MongoDB
+  await connect(app.config.DATABASE_URL);
 
   // Json Schemas
   app.addSchema(paginationSchema);
