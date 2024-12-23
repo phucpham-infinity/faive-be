@@ -11,7 +11,7 @@ export const bearerTokenVerify = (fastify: FastifyInstance) =>
     async (request: FastifyRequest, reply: FastifyReply) => {
       try {
         const payload = await request.jwtVerify();
-        request.user = payload;
+        request.currentUser = payload as any;
       } catch (err: any) {
         reply.unauthorized(err.message ?? "JWT verify error.");
       }

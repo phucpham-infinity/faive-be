@@ -9,3 +9,6 @@ export * from "./forgotPassword/forgotPassword.handler";
 
 export * from "./resetPassword/resetPassword.schema";
 export * from "./resetPassword/resetPassword.handler";
+
+export * from "./updatePassword/updatePassword.schema";
+export * from "./updatePassword/updatePassword.handler";

@@ -24,9 +24,10 @@ declare module "fastify" {
   }
 
   interface FastifyRequest {
-    user: {
+    currentUser: {
       id: string;
       role: string;
+      email: string;
     };
     queues: QueueMQ[];
     getQueue: (name: string) => QueueMQ;

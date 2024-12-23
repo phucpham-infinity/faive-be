@@ -29,4 +29,12 @@ export default async function (fastify: FastifyInstance) {
     schema: authBiz.resetPasswordSchema,
     handler: authBiz.resetPassword,
   });
+
+  fastify.route({
+    method: "POST",
+    url: "/update-password",
+    preValidation: [fastify.authenticate],
+    schema: authBiz.updatePasswordSchema,
+    handler: authBiz.updatePassword,
+  });
 }
