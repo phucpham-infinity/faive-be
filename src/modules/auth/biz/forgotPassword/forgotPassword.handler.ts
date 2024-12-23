@@ -31,6 +31,5 @@ export async function forgotPassword(
 
   return reply.ok200({
     message: "An OTP has been sent to your email to reset your password.",
-    otp,
   });
 }

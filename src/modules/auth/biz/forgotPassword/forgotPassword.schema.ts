@@ -18,7 +18,6 @@ export const forgotPasswordSchema = {
       type: "object",
       properties: {
         message: { type: "string" },
-        otp: { type: "string" },
       },
     },
     404: { $ref: "messageResponseSchema#" },
