@@ -1,4 +1,4 @@
-import { hashPassword, verifyPassword } from "@/common/helper";
+import { generateOtp, hashPassword, verifyPassword } from "@/common/helper";
 import mongoose, { Document } from "mongoose";
 
 interface IUser extends Document {
@@ -19,6 +19,7 @@ interface IUser extends Document {
     candidatePassword: string,
     userPassword: string
   ) => Promise<boolean>;
+  createPasswordResetToken: () => string;
 }
 
 const userSchema = new mongoose.Schema<IUser>({
@@ -88,27 +89,7 @@ userSchema.pre<IUser>("save", async function (next) {
   next();
 });
 
-const generateOtp = () => {
-  //   const types = {
-  //     alphanumeric: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  //     numeric: "0123456789",
-  //     alpha: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  //   };
-
-  //   const otpType = config.otp.type;
-  //   const otpLength = config.otp.length;
-
-  //   const str = types[otpType];
-
-  //   let OTP = "";
-
-  //   for (let i = 0; i < otpLength; i++) {
-  //     OTP += str[Math.floor(Math.random() * otpLength)];
-  //   }
-  return "111111";
-};
-
-userSchema.methods.createpassword_reset_token = function () {
+userSchema.methods.createPasswordResetToken = function () {
   const otp = generateOtp();
 
   this.password_reset_token = otp;

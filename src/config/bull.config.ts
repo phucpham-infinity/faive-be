@@ -1,11 +1,10 @@
-import { Queue as QueueMQ, ConnectionOptions, Job, Worker } from "bullmq";
+import { Queue as QueueMQ, ConnectionOptions } from "bullmq";
 import { BullMQAdapter } from "@bull-board/api/bullMQAdapter";
 import { createBullBoard } from "@bull-board/api";
 import { FastifyInstance } from "fastify";
 import { FastifyAdapter } from "@bull-board/fastify";
-
-const sleep = (t: number): Promise<void> =>
-  new Promise((resolve) => setTimeout(resolve, t * 1000));
+import { EMAIL_QUEUE } from "@/modules/email";
+import { setupEmailWorker } from "@/modules/email/worker";
 
 const createQueueMQ = (name: string, connection: ConnectionOptions): QueueMQ =>
   new QueueMQ(name, { connection });
@@ -17,27 +16,6 @@ const readQueuesFromEnv = (qStr: string): string[] => {
   } catch (e) {
     return [];
   }
-};
-
-const setupBullMQProcessor = (
-  queueName: string,
-  connection: ConnectionOptions
-) => {
-  new Worker(
-    queueName,
-    async (job: Job) => {
-      for (let i = 0; i <= 100; i++) {
-        await sleep(Math.random());
-        await job.updateProgress(i);
-        await job.log(`Processing job at interval ${i}`);
-
-        if (Math.random() * 200 < 1) throw new Error(`Random error ${i}`);
-      }
-
-      return { jobId: `This is the return value of job (${job.id})` };
-    },
-    { connection }
-  );
 };
 
 const init = (fastify: FastifyInstance) => {
@@ -52,7 +30,13 @@ const init = (fastify: FastifyInstance) => {
   );
 
   queues.forEach((q) => {
-    setupBullMQProcessor(q.name, redisConfig);
+    switch (q.name) {
+      case EMAIL_QUEUE:
+        setupEmailWorker(redisConfig);
+        break;
+      default:
+        break;
+    }
   });
 
   const serverAdapter = new FastifyAdapter();
@@ -60,6 +44,15 @@ const init = (fastify: FastifyInstance) => {
   createBullBoard({
     queues: queues.map((q) => new BullMQAdapter(q)),
     serverAdapter,
+  });
+
+  const getQueueByName = (name: string) => {
+    return queues.find((q) => q.name === name);
+  };
+
+  fastify.addHook("onRequest", async (request, reply) => {
+    request.queues = queues;
+    request.getQueue = getQueueByName;
   });
 
   serverAdapter.setBasePath("/queues");

@@ -28,6 +28,8 @@ declare module "fastify" {
       id: string;
       role: string;
     };
+    queues: QueueMQ[];
+    getQueue: (name: string) => QueueMQ;
   }
   interface FastifyReply {
     ok200: (data: any, meta?: any) => void;
