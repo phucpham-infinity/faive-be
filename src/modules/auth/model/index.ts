@@ -8,9 +8,8 @@ interface IUser extends Document {
   has_ever_added_product: boolean;
   email: string;
   password: string;
-  confirm_password?: string;
   password_reset_token: string;
-  password_reset_expires: Date;
+  password_reset_expires: Date | null;
   created_at: Date;
   updated_at: Date;
   delete_at: Date;
@@ -37,16 +36,6 @@ const userSchema = new mongoose.Schema<IUser>({
     type: String,
     select: false,
     required: true,
-  },
-  confirm_password: {
-    type: String,
-    required: [true, "Enter your confirm password"],
-    validate: {
-      validator: function (this: IUser, value: string): boolean {
-        return value === this.password;
-      },
-      message: "Password and confirm password should be same!",
-    },
   },
   product_count: {
     type: Number,
@@ -80,12 +69,8 @@ userSchema.pre<IUser>("save", async function (next) {
   if (!this.isModified("password")) {
     return next();
   }
-
-  // Hash the password
   this.password = await hashPassword(this.password);
 
-  // Remove confirm_password field before saving to the database
-  this.confirm_password = undefined;
   next();
 });
 

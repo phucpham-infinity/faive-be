@@ -22,4 +22,11 @@ export default async function (fastify: FastifyInstance) {
     schema: authBiz.forgotPasswordSchema,
     handler: authBiz.forgotPassword,
   });
+
+  fastify.route({
+    method: "POST",
+    url: "/reset-password",
+    schema: authBiz.resetPasswordSchema,
+    handler: authBiz.resetPassword,
+  });
 }

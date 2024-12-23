@@ -6,3 +6,6 @@ export * from "./register/register.handler";
 
 export * from "./forgotPassword/forgotPassword.schema";
 export * from "./forgotPassword/forgotPassword.handler";
+
+export * from "./resetPassword/resetPassword.schema";
+export * from "./resetPassword/resetPassword.handler";
