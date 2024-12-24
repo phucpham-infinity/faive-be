@@ -23,6 +23,8 @@ import { swaggerConfig } from "./config/swagger.config";
 
 import { productsRoutes, productSchema } from "./modules/products";
 import { authRoutes } from "./modules/auth";
+import { usersRoutes } from "./modules/users";
+
 import {
   messageSchema,
   paramIdSchema,
@@ -75,6 +77,7 @@ const main = async () => {
     async (api) => {
       api.register(productsRoutes, { prefix: "/products" });
       api.register(authRoutes, { prefix: "/auth" });
+      api.register(usersRoutes, { prefix: "/user" });
     },
     { prefix: "/api/v1" }
   );
