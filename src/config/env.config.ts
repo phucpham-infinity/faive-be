@@ -52,6 +52,26 @@ const Config = {
         type: "string",
         default: "Example",
       },
+      S3_BUCKET_NAME: {
+        type: "string",
+        default: "faive",
+      },
+      S3_ACCESS_KEY: {
+        type: "string",
+        default: "XXCnonT3wapzI3YYiWiJ",
+      },
+      S3_SECRET_ACCESS_KEY: {
+        type: "string",
+        default: "ld2GzR6qDd052GapcbSbQnWtV6j0PCJjn2TIpWmb",
+      },
+      S3_REGION: {
+        type: "string",
+        default: "us-east-1",
+      },
+      S3_ENDPOINT: {
+        type: "string",
+        default: "https://minio.ihomelap.io.vn",
+      },
     },
   },
 };
