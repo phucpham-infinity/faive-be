@@ -21,7 +21,7 @@ export const uploadAvatarToMinIO = async (
     }
 
     await minioClient.fPutObject(bucketName, objectName, filePath);
-    return `https://${process.env.S3_ENDPOINT}/${bucketName}/${objectName}`;
+    return `https://${process.env.S3_ENDPOINT}/${bucketName}/avatar/${objectName}`;
   } catch (error) {
     throw new Error(`Lỗi khi upload ảnh lên MinIO: ${error.message}`);
   }
