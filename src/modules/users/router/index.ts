@@ -23,4 +23,18 @@ export default async function (fastify: FastifyInstance) {
     schema: usersBiz.updateUserProfileSchema,
     handler: usersBiz.updateUserProfile,
   });
+  fastify.route({
+    method: "PUT",
+    url: "/cover-url",
+    preValidation: [fastify.authenticate],
+    schema: usersBiz.updateUserProfileSchema,
+    handler: usersBiz.updateUserProfile,
+  });
+  fastify.route({
+    method: "PUT",
+    url: "/profile-url",
+    preValidation: [fastify.authenticate],
+    schema: usersBiz.updateProfileUrlSchema,
+    handler: usersBiz.updateProfileUrl,
+  });
 }

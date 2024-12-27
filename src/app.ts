@@ -6,6 +6,7 @@ import fastifyHelmet from "@fastify/helmet";
 import fastifyRedis from "@fastify/redis";
 import fastifyJwt from "@fastify/jwt";
 import fastifySensible from "@fastify/sensible";
+import fastifyMultipart, { ajvFilePlugin } from "@fastify/multipart";
 
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
@@ -21,7 +22,6 @@ import bullConfig from "./config/bull.config";
 
 import { swaggerConfig } from "./config/swagger.config";
 
-import { productsRoutes, productSchema } from "./modules/products";
 import { authRoutes } from "./modules/auth";
 import { usersRoutes } from "./modules/users";
 
@@ -36,11 +36,19 @@ import { bearerTokenVerify, replyOk200 } from "./common/decorate";
 import { connect } from "./common/lib/mongo.db";
 
 const main = async () => {
-  const app = fastify({ logger: loggerConfig });
+  const app = fastify({
+    logger: loggerConfig,
+    ajv: {
+      plugins: [ajvFilePlugin],
+    },
+  });
 
   // Now we setup our app, plugins and such
   await app.register(fastifyEnv, envConfig);
   await app.register(fastifyCors, corsConfig);
+  await app.register(fastifyMultipart, {
+    attachFieldsToBody: true,
+  });
   await app.register(fastifyCompress, compressConfig);
   await app.register(fastifyHelmet, helmetConfig);
   await app.register(fastifyRedis, redisConfig(app));
@@ -58,8 +66,6 @@ const main = async () => {
   app.addSchema(paramIdSchema);
   app.addSchema(messageSchema);
 
-  app.addSchema(productSchema);
-
   // Swagger Docs
   if (app.config.ENABLE_SWAGGER) {
     await app.register(fastifySwagger, swaggerConfig);
@@ -75,7 +81,6 @@ const main = async () => {
   // API Endpoint routes
   await app.register(
     async (api) => {
-      api.register(productsRoutes, { prefix: "/products" });
       api.register(authRoutes, { prefix: "/auth" });
       api.register(usersRoutes, { prefix: "/user" });
     },

@@ -64,6 +64,11 @@
     "@fastify/error" "^4.0.0"
     fastify-plugin "^5.0.0"
 
+"@fastify/busboy@^3.0.0":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@fastify/busboy/-/busboy-3.1.1.tgz#af3aea7f1e52ec916d8b5c9dcc0f09d4c060a3fc"
+  integrity sha512-5DGmA8FTdB2XbDeEwc/5ZXBl6UbBAyBOOLlPuBnZ/N1SwdH9Ii+cOX3tBROlDgcTXxjOYnLMVoKk9+FXAw0CJw==
+
 "@fastify/compress@^8.0.1":
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/@fastify/compress/-/compress-8.0.1.tgz#2d7c327e822713bbe5f8390722a74f06d06611fd"
@@ -85,6 +90,11 @@
   dependencies:
     fastify-plugin "^5.0.0"
     mnemonist "0.39.8"
+
+"@fastify/deepmerge@^2.0.0":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@fastify/deepmerge/-/deepmerge-2.0.1.tgz#68150cd7ab709b63a718aac8335561779b910032"
+  integrity sha512-hx+wJQr9Ph1hY/dyzY0SxqjumMyqZDlIF6oe71dpRKDHUg7dFQfjG94qqwQ274XRjmUrwKiYadex8XplNHx3CA==
 
 "@fastify/env@^5.0.1":
   version "5.0.1"
@@ -139,6 +149,17 @@
   dependencies:
     fastify-plugin "^5.0.0"
     mongodb "^6.5.0"
+
+"@fastify/multipart@^9.0.1":
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/@fastify/multipart/-/multipart-9.0.1.tgz#2d003776c6ee8f787ceb8a4bb77a4256727b3f34"
+  integrity sha512-vt2gOCw/O4EwpN4KlLVJxth4iQlDf7T5ggw2Db2C+UbO2WJBG7y0jEBvu/HT6JIW/lBYaqrrUy9MmTpCKgXEpw==
+  dependencies:
+    "@fastify/busboy" "^3.0.0"
+    "@fastify/deepmerge" "^2.0.0"
+    "@fastify/error" "^4.0.0"
+    fastify-plugin "^5.0.0"
+    secure-json-parse "^3.0.0"
 
 "@fastify/redis@^7.0.1":
   version "7.0.1"
@@ -2549,7 +2570,7 @@ secure-json-parse@^2.4.0:
   resolved "https://registry.yarnpkg.com/secure-json-parse/-/secure-json-parse-2.7.0.tgz#5a5f9cd6ae47df23dba3151edd06855d47e09862"
   integrity sha512-6aU+Rwsezw7VR8/nyvKTx8QpWH9FrcYiXXlqC4z5d5XQBDRqtbfsRjnwGyqbi3gddNtWHuEk9OANUotL26qKUw==
 
-secure-json-parse@^3.0.1:
+secure-json-parse@^3.0.0, secure-json-parse@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/secure-json-parse/-/secure-json-parse-3.0.1.tgz#78987844ea1f0cfe9c5f9f723cdf031f542e7b5f"
   integrity sha512-9QR7G96th4QJ2+dJwvZB+JoXyt8PN+DbEjOr6kL2/JU4KH8Eb2sFdU+gt8EDdzWDWoWH0uocDdfCoFzdVSixUA==

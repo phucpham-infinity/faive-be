@@ -74,6 +74,16 @@ userSchema.pre<IUser>("save", async function (next) {
   next();
 });
 
+userSchema.pre("findOneAndUpdate", async function (next) {
+  const update = this.getUpdate() as any;
+
+  if (update.password) {
+    update.password = await hashPassword(update.password);
+  }
+
+  next();
+});
+
 userSchema.methods.createPasswordResetToken = function () {
   const otp = generateOtp();
 
