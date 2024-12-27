@@ -1,5 +1,5 @@
 ---
-to: src/modules/<%= namePathCase %>/router/index.ts
+to: src/modules/<%= nameCamelCase %>/router/index.ts
 ---
 import { FastifyInstance } from "fastify";
 import * as <%= name %>Biz from "../biz";

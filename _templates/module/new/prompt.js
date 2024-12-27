@@ -1,6 +1,6 @@
 module.exports = {
   prompt: async ({ inquirer }) => {
-    const { pathCase, pascalCase } = await import("change-case");
+    const { pascalCase, camelCase } = await import("change-case");
 
     return inquirer
       .prompt([
@@ -13,7 +13,7 @@ module.exports = {
       .then((answers) => {
         return {
           ...answers,
-          namePathCase: pathCase(answers.name),
+          nameCamelCase: camelCase(answers.name),
           namePascalCase: pascalCase(answers.name),
         };
       });

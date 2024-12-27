@@ -1,4 +1,4 @@
 ---
-to: src/modules/<%= namePathCase %>/index.ts
+to: src/modules/<%= nameCamelCase %>/index.ts
 ---
-export { default as <%= namePathCase %>Routes } from "./router";
+export { default as <%= nameCamelCase %>Routes } from "./router";

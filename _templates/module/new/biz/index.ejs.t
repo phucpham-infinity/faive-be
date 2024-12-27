@@ -1,5 +1,5 @@
 ---
-to: src/modules/<%= namePathCase %>/biz/index.ts
+to: src/modules/<%= nameCamelCase %>/biz/index.ts
 ---
-export * from "./getAll<%= namePascalCase %>/<%= namePathCase %>.handler";
-export * from "./getAll<%= namePascalCase %>/<%= namePathCase %>.schema";
+export * from "./getAll<%= namePascalCase %>/<%= nameCamelCase %>.handler";
+export * from "./getAll<%= namePascalCase %>/<%= nameCamelCase %>.schema";
