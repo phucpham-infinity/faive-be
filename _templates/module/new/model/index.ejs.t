@@ -23,4 +23,4 @@ const <%= nameCamelCase %>Schema = new mongoose.Schema<I<%= namePascalCase %>>({
   },
 });
 
-export const User = mongoose.model<I<%= namePascalCase %>>("<%= namePascalCase %>", userSchema);
+export const <%= namePascalCase %> = mongoose.model<I<%= namePascalCase %>>("<%= namePascalCase %>", <%= nameCamelCase %>Schema);

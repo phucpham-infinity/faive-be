@@ -1,5 +1,5 @@
 ---
-to: src/modules/<%= nameCamelCase %>/getAll/getAll.handler.ts
+to: src/modules/<%= nameCamelCase %>/biz/getAll/getAll.handler.ts
 ---
 import { FastifyReply, FastifyRequest } from "fastify";
 import { asyncHandler } from "@/common/helper";

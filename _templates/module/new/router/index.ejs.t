@@ -8,7 +8,7 @@ export default async function (fastify: FastifyInstance) {
   fastify.route({
     method: "GET",
     url: "/all",
-    schema: <%= name %>Biz.getAllSchema,
+    schema: <%= name %>Biz.get<%= namePascalCase %>AllSchema,
     handler: <%= name %>Biz.getAll<%= namePascalCase %>,
   });
 }

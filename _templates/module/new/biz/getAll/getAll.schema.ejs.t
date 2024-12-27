@@ -1,5 +1,5 @@
 ---
-to: src/modules/<%= nameCamelCase %>/getAll/getAll.schema.ts
+to: src/modules/<%= nameCamelCase %>/biz/getAll/getAll.schema.ts
 ---
 export const get<%= namePascalCase %>AllSchema = {
   tags: ["<%= nameCamelCase %>"],
