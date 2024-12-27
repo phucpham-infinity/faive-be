@@ -9,3 +9,6 @@ export * from "./updateUserProfile/updateUserProfile.schema";
 
 export * from "./updateProfileUrl/updateProfileUrl.handler";
 export * from "./updateProfileUrl/updateProfileUrl.schema";
+
+export * from "./uploadCoverImage/uploadCoverImage.handler";
+export * from "./uploadCoverImage/uploadCoverImage.schema";

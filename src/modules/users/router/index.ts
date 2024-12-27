@@ -27,14 +27,14 @@ export default async function (fastify: FastifyInstance) {
     method: "PUT",
     url: "/cover-url",
     preValidation: [fastify.authenticate],
-    schema: usersBiz.updateUserProfileSchema,
-    handler: usersBiz.updateUserProfile,
+    schema: usersBiz.uploadCoverImageSchema,
+    handler: usersBiz.uploadCoverImage,
   });
   fastify.route({
     method: "PUT",
     url: "/profile-url",
     preValidation: [fastify.authenticate],
-    schema: usersBiz.updateProfileUrlSchema,
+    schema: usersBiz.updateProfileStatusSchema,
     handler: usersBiz.updateProfileUrl,
   });
 }
