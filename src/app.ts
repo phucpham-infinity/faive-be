@@ -24,6 +24,7 @@ import { swaggerConfig } from "./config/swagger.config";
 
 import { authRoutes } from "./modules/auth";
 import { usersRoutes } from "./modules/users";
+import { taxonomyTermRoutes } from "./modules/taxonomyTerm";
 
 import {
   messageSchema,
@@ -83,6 +84,7 @@ const main = async () => {
     async (api) => {
       api.register(authRoutes, { prefix: "/auth" });
       api.register(usersRoutes, { prefix: "/user" });
+      api.register(taxonomyTermRoutes, { prefix: "/taxonomy-term" });
     },
     { prefix: "/api/v1" }
   );

@@ -33,6 +33,6 @@ declare module "fastify" {
     getQueue: (name: string) => QueueMQ;
   }
   interface FastifyReply {
-    ok200: (data: any, meta?: any) => void;
+    ok200: (data?: any, meta?: any) => void;
   }
 }
