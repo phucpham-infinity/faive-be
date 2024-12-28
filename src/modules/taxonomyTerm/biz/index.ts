@@ -9,3 +9,6 @@ export * from "./updateFaiveList/updateFaiveList.schema";
 
 export * from "./deleteFaiveList/deleteFaiveList.handler";
 export * from "./deleteFaiveList/deleteFaiveList.schema";
+
+export * from "./getUserFaivelist/getUserFaivelist.handler";
+export * from "./getUserFaivelist/getUserFaivelist.schema";

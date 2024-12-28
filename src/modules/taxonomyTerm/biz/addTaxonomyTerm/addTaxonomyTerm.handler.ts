@@ -26,6 +26,6 @@ export async function addTaxonomyTerm(
   if (!faivelist) return reply.badGateway("Faivelist not created");
 
   return reply.ok200({
-    faivelist: { ...faivelist, images: [], productsCount: 0 },
+    faivelist: { ...faivelist.toJSON(), images: [], productsCount: 0 },
   });
 }

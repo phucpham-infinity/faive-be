@@ -1,12 +1,14 @@
 export const getUserFaivelistSchema = {
   tags: ["taxonomyTerm"],
   description: "Get user faivelist",
-  params: {
+  querystring: {
     type: "object",
     properties: {
-      id: { type: "string" },
+      q: { type: "string", description: "Search query" },
+      sort: { type: "string", description: "Sort order (e.g., asc or desc)" },
+      user: { type: "string", description: "User ID or username" },
     },
-    required: ["id"],
+    required: [],
   },
   security: [{ bearerAuth: [] }],
 };
